@@ -41,7 +41,7 @@ describe('infrastructure/controllers/auth', () => {
       .useValue({
         canActivate(context: ExecutionContext) {
           const req = context.switchToHttp().getRequest();
-          req.user = { username: 'username' };
+          req.user = { email: 'email' };
           return JSON.stringify(req.cookies) === JSON.stringify({ Authentication: '123456', Path: '/', 'Max-Age': '1800' });
         },
       })
@@ -49,7 +49,7 @@ describe('infrastructure/controllers/auth', () => {
       .useValue({
         canActivate(context: ExecutionContext) {
           const req = context.switchToHttp().getRequest();
-          req.user = { username: 'username' };
+          req.user = { email: 'email' };
           return true;
         },
       })
@@ -66,11 +66,13 @@ describe('infrastructure/controllers/auth', () => {
     (loginUseCase.validateUserForLocalStragtegy as jest.Mock).mockReturnValue(
       Promise.resolve({
         id: 1,
-        username: 'username',
+        fullName: 'name',
+        email: 'email',
         createDate: createDate,
         updatedDate: updatedDate,
         lastLogin: null,
         hashRefreshToken: null,
+        userName: 'userName'
       }),
     );
     (loginUseCase.getCookieWithJwtToken as jest.Mock).mockReturnValue(
@@ -82,7 +84,7 @@ describe('infrastructure/controllers/auth', () => {
 
     const result = await request(app.getHttpServer())
       .post('/auth/login')
-      .send({ username: 'username', password: 'password' })
+      .send({ email: 'email', password: 'password' })
       .expect(201);
 
     expect(result.headers['set-cookie']).toEqual([
@@ -111,7 +113,7 @@ describe('infrastructure/controllers/auth', () => {
   it(`/POST login should return 401`, async (done) => {
     (loginUseCase.validateUserForLocalStragtegy as jest.Mock).mockReturnValue(Promise.resolve(null));
 
-    await request(app.getHttpServer()).post('/auth/login').send({ username: 'username', password: 'password' }).expect(401);
+    await request(app.getHttpServer()).post('/auth/login').send({ email: 'email', password: 'password' }).expect(401);
 
     done();
   });
@@ -129,7 +131,7 @@ describe('infrastructure/controllers/auth', () => {
   });
 
   it(`/GET is_authenticated should return 200`, async (done) => {
-    (isAuthenticatedUseCases.execute as jest.Mock).mockReturnValue(Promise.resolve({ username: 'username' }));
+    (isAuthenticatedUseCases.execute as jest.Mock).mockReturnValue(Promise.resolve({ email: 'email' }));
 
     await request(app.getHttpServer())
       .get('/auth/is_authenticated')
@@ -141,7 +143,7 @@ describe('infrastructure/controllers/auth', () => {
   });
 
   it(`/GET is_authenticated should return 403`, async (done) => {
-    (isAuthenticatedUseCases.execute as jest.Mock).mockReturnValue(Promise.resolve({ username: 'username' }));
+    (isAuthenticatedUseCases.execute as jest.Mock).mockReturnValue(Promise.resolve({ email: 'email' }));
 
     await request(app.getHttpServer()).get('/auth/is_authenticated').send().expect(403);
 

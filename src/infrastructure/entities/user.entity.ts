@@ -5,9 +5,12 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column('varchar')
+  fullName: string;
+
   @Index({ unique: true })
   @Column('varchar', { unique: true })
-  username: string;
+  userName: string;
 
   @Column('varchar', { select: false, unique: true })
   email: string;
@@ -28,5 +31,5 @@ export class User {
   hach_refresh_token: string;
 
   @Column('text', { nullable: true })
-  photo: string;
+  image?: string;
 }
