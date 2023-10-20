@@ -3,14 +3,14 @@ import { LoginUseCases } from '@/usecases/auth/login.usecases';
 import { LogoutUseCases } from '@/usecases/auth/logout.usecases';
 import { Body, Controller, Get, Inject, Post, Req, Request, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiExtraModels, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UseCaseProxy } from '../usecases-proxy/usecases-proxy';
-import { UsecasesProxyModule } from '../usecases-proxy/usecases-proxy.module';
+import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
+import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { AuthLoginDto } from './auth-dto.class';
 import { IsAuthPresenter } from './auth.presenter';
-import { LoginGuard } from '../common/guards/login.guard';
-import { JwtAuthGuard } from '../common/guards/jwtAuth.guard';
-import JwtRefreshGuard from '../common/guards/jwtRefresh.guard';
-import { ApiResponseType } from '../common/swagger/response.decorator';
+import { LoginGuard } from '../../common/guards/login.guard';
+import { JwtAuthGuard } from '../../common/guards/jwtAuth.guard';
+import JwtRefreshGuard from '../../common/guards/jwtRefresh.guard';
+import { ApiResponseType } from '../../common/swagger/response.decorator';
 
 
 @Controller('auth')
@@ -39,11 +39,11 @@ export class AuthController {
   async login(@Body() auth: AuthLoginDto, @Request() request: any) {
     const accessTokenCookie = await this.loginUsecaseProxy
       .getInstance()
-      .getCookieWithJwtToken(auth.username);
+      .getCookieWithJwtToken(auth.email);
 
     const refreshTokenCookie = await this.loginUsecaseProxy
       .getInstance()
-      .getCookieWithJwtRefreshToken(auth.username);
+      .getCookieWithJwtRefreshToken(auth.email);
 
     request.res.setHeader('Set-Cookie', [accessTokenCookie, refreshTokenCookie]);
     return 'Login successful';
@@ -69,10 +69,10 @@ export class AuthController {
   async isAuthenticated(@Req() req: any) {
     const user = await this.isAuthUsecaseProxy.
       getInstance()
-      .execute(req.user.username);
+      .execute(req.user.emai);
 
     const response = new IsAuthPresenter();
-    response.username = user.username;
+    response.email = user.email;
     return response;
   }
 
@@ -82,7 +82,7 @@ export class AuthController {
   async refresh(@Req() req: any) {
     const accessTokenCookie = await this.loginUsecaseProxy
       .getInstance()
-      .getCookieWithJwtToken(req.user.username);
+      .getCookieWithJwtToken(req.user.email);
 
     req.res.setHeader('Set-Cookie', accessTokenCookie);
     return 'Refresh successful';

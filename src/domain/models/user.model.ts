@@ -1,12 +1,13 @@
 export class UserWithoutPassword {
   id: number;
-  username: string;
+  fullName: string;
+  userName: string;
   email: string;
   createDate: Date;
   updatedDate: Date;
   lastLogin: Date;
   hashRefreshToken: string;
-  photo: string;
+  image?: string;
 }
 
 export class UserM extends UserWithoutPassword {
