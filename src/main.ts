@@ -4,7 +4,7 @@ import { AllExceptionFilter } from './infrastructure/common/filters/exception.fi
 import { LoggerService } from './infrastructure/logger/logger.service';
 import { LoggingInterceptor } from './infrastructure/common/interceptors/logger.interceptor';
 import { ResponseInterceptor } from './infrastructure/common/interceptors/response.interceptor';
-import cookieParser from 'cookie-parser';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

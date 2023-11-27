@@ -1,13 +1,13 @@
-import { ILogger } from "@/domain/logger/logger.interface";
+import { IBcryptService } from "src/domain/adapters/bcrypt.interface";
+import { IJwtService } from "src/domain/adapters/jwt.interface";
+import { JWTConfig } from "src/domain/config/jwt.interface";
+import { IException } from "src/domain/exceptions/exceptions.interface";
+import { ILogger } from "src/domain/logger/logger.interface";
+import { UserM } from "src/domain/models/user.model";
+import { UserRepository } from "src/domain/repositories/userRepository.interface";
 import { IsAuthenticatedUseCases } from "../isAuthenticated.usecases";
 import { LoginUseCases } from "../login.usecases";
 import { LogoutUseCases } from "../logout.usecases";
-import { IException } from "@/domain/exceptions/exceptions.interface";
-import { IJwtService } from "@/domain/adapters/jwt.interface";
-import { JWTConfig } from "@/domain/config/jwt.interface";
-import { UserRepository } from "@/domain/repositories/userRepository.interface";
-import { IBcryptService } from "@/domain/adapters/bcrypt.interface";
-import { UserM } from "@/domain/models/user.model";
 
 
 describe('uses_cases/authentication', () => {

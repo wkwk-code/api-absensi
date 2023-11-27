@@ -1,4 +1,4 @@
-import { LoggerService } from '@/infrastructure/logger/logger.service';
+import { LoggerService } from 'src/infrastructure/logger/logger.service';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 
 interface IError {

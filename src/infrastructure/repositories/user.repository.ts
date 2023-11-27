@@ -1,10 +1,10 @@
-import { UserM, UserWithoutPassword } from '@/domain/models/user.model';
-import { UserRepository } from '@/domain/repositories/userRepository.interface';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { CreateUserDto } from '../controllers/users/user-dto.class';
+import { UserWithoutPassword, UserM } from 'src/domain/models/user.model';
+import { UserRepository } from 'src/domain/repositories/userRepository.interface';
 
 @Injectable()
 export class DatabaseUserRepository implements UserRepository {

@@ -10,17 +10,17 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "paths": {
-      "@/domain/*": [
-        "./src/domain/*.ts"
-      ],
-      "@/infrastructure/*": [
-        "./src/infrastructure/*.ts"
-      ],
-      "@/usecases/*": [
-        "./src/usecases/*.ts"
-      ]
-    },
+    // "paths": {
+    //   "@/domain/*": [
+    //     "src/domain/*.ts"
+    //   ],
+    //   "@/infrastructure/*": [
+    //     "src/infrastructure/*.ts"
+    //   ],
+    //   "@/usecases/*": [
+    //     "src/usecases/*.ts"
+    //   ]
+    // },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

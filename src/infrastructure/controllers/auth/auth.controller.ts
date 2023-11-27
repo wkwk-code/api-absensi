@@ -1,6 +1,6 @@
-import { IsAuthenticatedUseCases } from '@/usecases/auth/isAuthenticated.usecases';
-import { LoginUseCases } from '@/usecases/auth/login.usecases';
-import { LogoutUseCases } from '@/usecases/auth/logout.usecases';
+import { IsAuthenticatedUseCases } from 'src/usecases/auth/isAuthenticated.usecases';
+import { LoginUseCases } from 'src/usecases/auth/login.usecases';
+import { LogoutUseCases } from 'src/usecases/auth/logout.usecases';
 import { Body, Controller, Get, Inject, Post, Req, Request, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiExtraModels, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';

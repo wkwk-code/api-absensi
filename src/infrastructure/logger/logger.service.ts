@@ -1,4 +1,4 @@
-import { ILogger } from '@/domain/logger/logger.interface';
+import { ILogger } from 'src/domain/logger/logger.interface';
 import { Injectable, Logger } from '@nestjs/common';
 
 @Injectable()

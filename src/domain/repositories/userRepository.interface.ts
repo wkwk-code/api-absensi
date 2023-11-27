@@ -1,4 +1,4 @@
-import { CreateUserDto } from "@/infrastructure/controllers/users/user-dto.class";
+import { CreateUserDto } from "src/infrastructure/controllers/users/user-dto.class";
 import { UserM, UserWithoutPassword } from "../models/user.model";
 
 export interface UserRepository {

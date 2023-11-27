@@ -11,9 +11,9 @@ import { EnvironmentConfigService } from '../config/environment-config/environme
 import { DatabaseUserRepository } from '../repositories/user.repository';
 import { BcryptService } from '../services/bcrypt/bcrypt.service';
 import { UseCaseProxy } from './usecases-proxy';
-import { LoginUseCases } from '@/usecases/auth/login.usecases';
-import { IsAuthenticatedUseCases } from '@/usecases/auth/isAuthenticated.usecases';
-import { LogoutUseCases } from '@/usecases/auth/logout.usecases';
+import { IsAuthenticatedUseCases } from 'src/usecases/auth/isAuthenticated.usecases';
+import { LoginUseCases } from 'src/usecases/auth/login.usecases';
+import { LogoutUseCases } from 'src/usecases/auth/logout.usecases';
 
 @Module({
   imports: [
